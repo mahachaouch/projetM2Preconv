@@ -6,25 +6,36 @@
 package com.alexis.lebreton.utilities.entities;
 
 import com.alexis.lebreton.utilities.Etudiant;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 
 /**
  *
- * @author ben
+ * @author maha-
  */
 
 @Singleton
 @LocalBean
 public class EtudiantsSingleton {
     
-    private final ArrayList<Etudiant> etds = new ArrayList<>();
+    private HashMap<Integer, Etudiant> etds = new HashMap<>();;
     
-        public Etudiant ajouterEtudiant(Etudiant e) {
-        etds.add(e);
-        return e;
+        public Etudiant ajouterEtudiant(String nom,String prenom,Integer n) {
+        Etudiant et= new Etudiant(nom,prenom,n);
+        etds.put(n,et);
+        return et;
     }
     
+        /*
+            permet de vérifier si l'étudiant existe, et donc un num etudiant valide
+        */
+    public Boolean exists(Integer numE){
+        return etds.containsKey(numE);
+    }    
+    
+    public Etudiant getEtudiant(Integer numE){
+        return etds.get(numE);
+    }
     
 }

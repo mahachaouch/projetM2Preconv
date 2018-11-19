@@ -24,7 +24,7 @@ public class Preconvention implements Serializable{
     
 
     private int refConv;
-    private int etudiant;
+    private Etudiant etudiant;
     private String diplome;
     private int entreprise;
     private int assurance;
@@ -36,7 +36,7 @@ public class Preconvention implements Serializable{
     private ReponseTraitPrec RepEn;
     private ReponseTraitPrec RepSco;
 
-    public Preconvention(int refConv, int etudiant, String d, int e, int a, float gratification, Date debut, Date fin, String sujetStage) {
+    public Preconvention(int refConv, Etudiant etudiant, String d, int e, int a, float gratification, Date debut, Date fin, String sujetStage) {
         this.refConv = refConv;
         this.etudiant = etudiant;
         this.diplome = d;
@@ -79,7 +79,7 @@ public class Preconvention implements Serializable{
         return refConv;
     }
 
-    public int getEtudiant() {
+    public Etudiant getEtudiant() {
         return etudiant;
     }
 
@@ -115,7 +115,7 @@ public class Preconvention implements Serializable{
         this.refConv = refConv;
     }
 
-    public void setEtudiant(int etudiant) {
+    public void setEtudiant(Etudiant etudiant) {
         this.etudiant = etudiant;
     }
 

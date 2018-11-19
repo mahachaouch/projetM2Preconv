@@ -44,6 +44,14 @@ public class PreconvRessource {
         return this.gson.toJson(this.preconvSingleton.getPrevention(Integer.parseInt(refPreconv)));
     }
     
+    @GET
+    @Path("preconventions")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllPreconv(){
+        return this.gson.toJson(this.preconvSingleton.getAll());
+    }
+    
+    
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response validerS(@PathParam("refPreconv") String refPreconv, @QueryParam("validS") String validS,@QueryParam("cause") String cause){

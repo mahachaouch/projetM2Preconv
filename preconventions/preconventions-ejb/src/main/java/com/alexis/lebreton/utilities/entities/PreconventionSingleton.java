@@ -35,10 +35,10 @@ public class PreconventionSingleton {
     @Inject
     private JMSContext context;
     
-    private HashMap<Integer, Preconvention> preconvs;
+    private HashMap<Integer, Preconvention> preconvs = new HashMap<>();
     private Integer lastid=0;
     
-     public Preconvention ajouterPreConvention(int etudiant, String d, int e, int a, float gratification, Date debut, Date fin, String sujetStage) {      
+     public Preconvention ajouterPreConvention(Etudiant etudiant, String d, int e, int a, float gratification, Date debut, Date fin, String sujetStage) {      
         Preconvention prec = new Preconvention(lastid, etudiant, d, e, a,  gratification,  debut,  fin,  sujetStage);
         this.preconvs.put(lastid, prec);
        // deposerPreconv(lastid);
@@ -76,11 +76,13 @@ public class PreconventionSingleton {
     }
 
     public Etudiant getEtudiant(int refPreconv) {
-       int numEtud = this.preconvs.get(refPreconv).getEtudiant();
-       return   Etudiant.getEtudiantById(numEtud);
+       return this.preconvs.get(refPreconv).getEtudiant();
     }
 
-    //sert à déposer sur le topic
+    public HashMap<Integer,Preconvention> getAll(){
+        return this.preconvs;
+    }
+    //sert à déposer une preconvention sur le topic dédié au dépot de demande préconventions
     public Preconvention deposerPreconv(int refPrec) {
         Preconvention prec = preconvs.get(refPrec);
         //ObjectMessage om = context.createObjectMessage(prec);
