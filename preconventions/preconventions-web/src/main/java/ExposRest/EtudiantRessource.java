@@ -5,10 +5,13 @@
  */
 package ExposRest;
 
+import javax.ws.rs.Path;
+
 /**
  *
  * @author maha-
  */
+@Path("etudiants/{ids}")
 public class EtudiantRessource {
     
 }

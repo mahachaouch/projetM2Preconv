@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ExposRest;
 
 import com.alexis.lebreton.utilities.entities.PreconventionSingleton;
 import com.alexis.lebreton.utilities.Preconvention;
+import com.google.gson.Gson;
 import java.util.logging.Level;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -90,14 +87,15 @@ public class PreconvRessource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Preconvention ajoutLigne(@PathParam("preconvention")  String prec) {
-       Preconvention p = this.gson.fromGson(prec,Preconvention.class);
+       Preconvention p;
+       p = this.gson.fromJson(prec, Preconvention.class);
         return preconvSingleton.ajouterPreConvention( p.getEtudiant(),p.getDiplome(),p.getEntreprise(), p.getEntreprise(), p.getGratification(), p.getDebut(), p.getFin(), p.getSujetStage());
     }
     
     private PreconventionSingleton lookupPreconventionSingletonBean() {
         try {
             javax.naming.Context c = new InitialContext();
-            return (PreconventionSingleton) c.lookup("java:global/eCommerce/eCommerce-ejb/ClientsSingleton!webserver.ClientsSingleton");
+            return (PreconventionSingleton) c.lookup("java:global/preconventions/preconventions-ejb/PreconventionSingleton!com.alexis.lebreton.utilities.entities.PreconventionSingleton");
         } catch (NamingException ne) {
             java.util.logging.Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

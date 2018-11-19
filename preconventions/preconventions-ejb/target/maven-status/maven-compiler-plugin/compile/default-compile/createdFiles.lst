@@ -1,7 +1,13 @@
-com\alexis\lebreton\NewSessionBean.class
-com\alexis\lebreton\utilities\entities\PreconventionSingleton.class
+com\alexis\lebreton\serviceJuridique\verifications.class
+fr\miage\toulouse\m2\eai\clientrest\metiersiren\Records.class
+fr\miage\toulouse\m2\eai\clientrest\metiersiren\Parameters.class
 com\alexis\lebreton\utilities\entities\EtudiantsSingleton.class
 com\alexis\lebreton\utilities\ReponseTraitPrec.class
 com\alexis\lebreton\utilities\Etudiant.class
 com\alexis\lebreton\utilities\Nommage.class
 com\alexis\lebreton\utilities\Preconvention.class
+fr\miage\toulouse\m2\eai\clientrest\metiersiren\Fields.class
+com\alexis\lebreton\NewSessionBean.class
+com\alexis\lebreton\utilities\entities\PreconventionSingleton.class
+fr\miage\toulouse\m2\eai\clientrest\metiersiren\Geometry.class
+fr\miage\toulouse\m2\eai\clientrest\metiersiren\SirenPOJO.class
