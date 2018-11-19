@@ -16,6 +16,7 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.ObjectMessage;
+import javax.jms.Queue;
 import javax.jms.Topic;
 
 /**
@@ -25,8 +26,11 @@ import javax.jms.Topic;
 @Singleton
 @LocalBean
 public class PreconventionSingleton {
-        @Resource(lookup = "jms/PreconventionDeposee")
+    @Resource(lookup = "jms/PreconventionDeposee")
     private Topic topic;
+    
+    @Resource(lookup="jms/GestionnairePreconventions")
+    private Queue queue;
     
     @Inject
     private JMSContext context;
@@ -42,24 +46,28 @@ public class PreconventionSingleton {
         return prec;
     }
 
-    public Preconvention validerEnseignement(int refPreConv, boolean v) {
-      //  this.preconvs.get(refPreConv).setValidE(v);
-        return this.preconvs.get(refPreConv);
+    public Preconvention validerJuridique(int refPreConv, boolean v,String cause) {
+        Preconvention prec = preconvs.get(refPreConv);
+        prec.getRepJur().setValRep(v);
+        prec.getRepJur().setCauseRep(cause);      
+        context.createProducer().send(queue, prec);
+        return prec;
     }
 
-    public Preconvention validerJuridique(int refPreConv, boolean v) {
-      //  this.preconvs.get(refPreConv).setValidJ(v);
-        return this.preconvs.get(refPreConv);
+    public Preconvention validerScolarite(int refPreConv, boolean v,String cause) {
+        Preconvention prec = preconvs.get(refPreConv);
+        prec.getRepSco().setValRep(v);
+        prec.getRepSco().setCauseRep(cause);
+        context.createProducer().send(queue, prec);
+        return prec;
     }
 
-    public Preconvention validerScolarite(int refPreConv, boolean v) {
-       // this.preconvs.get(refPreConv).setValidS(v);
-        return this.preconvs.get(refPreConv);
-    }
-
-        public void validerEns(int refPreconv,boolean b) {
+        public Preconvention validerEnseignement(int refPreconv,boolean b, String cause) {
         Preconvention prec = preconvs.get(refPreconv);
         prec.getRepEn().setValRep(b);
+        prec.getRepEn().setCauseRep(cause);
+        context.createProducer().send(queue, prec);
+        return prec;
     }
     
     

@@ -46,20 +46,20 @@ public class PreconvRessource {
     
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Response validerS(@PathParam("refPreconv") String refPreconv, @QueryParam("validS") String validS){
+    public Response validerS(@PathParam("refPreconv") String refPreconv, @QueryParam("validS") String validS,@QueryParam("cause") String cause){
        int ref = Integer.parseInt(refPreconv); 
        boolean val= Boolean.parseBoolean(validS);
-        Preconvention prec = this.preconvSingleton.validerScolarite(ref,val);
+        Preconvention prec = this.preconvSingleton.validerScolarite(ref,val,cause);
         return Response.ok(this.gson.toJson(prec)).build();
     }
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response validerE(@PathParam("refPreconv") String refPreconv, @QueryParam("validE") String validE){
+    public Response validerE(@PathParam("refPreconv") String refPreconv, @QueryParam("validE") String validE,@QueryParam("cause") String cause){
        int ref = Integer.parseInt(refPreconv); 
        boolean val= Boolean.parseBoolean(validE);
-        Preconvention prec = this.preconvSingleton.validerEnseignement(ref,val);
+        Preconvention prec = this.preconvSingleton.validerEnseignement(ref,val,cause);
         return Response.ok(this.gson.toJson(prec)).build();
     }
  
@@ -75,10 +75,10 @@ public class PreconvRessource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response validerj(@PathParam("refPreconv") String refPreconv, @QueryParam("validJ") String validJ){
+    public Response validerj(@PathParam("refPreconv") String refPreconv, @QueryParam("validJ") String validJ,@QueryParam("cause") String cause){
        int ref = Integer.parseInt(refPreconv); 
        boolean val= Boolean.parseBoolean(validJ);
-        Preconvention prec = this.preconvSingleton.validerJuridique(ref,val);
+        Preconvention prec = this.preconvSingleton.validerJuridique(ref,val,cause);
         return Response.ok(this.gson.toJson(prec)).build();
     }
     
