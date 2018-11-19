@@ -6,6 +6,9 @@
 package com.alexis.lebreton.utilities;
 
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
@@ -18,20 +21,17 @@ import javax.jms.Topic;
  *
  * @author ben
  */
-
-
-public class Preconvention implements Serializable{
-    
+public class Preconvention implements Serializable {
 
     private int refConv;
     private Etudiant etudiant;
     private String diplome;
-    private int entreprise;
+    private Integer entreprise;
     private int assurance;
     private float gratification;
     private Date debut;
     private Date fin;
-    private String sujetStage;    
+    private String sujetStage;
     private ReponseTraitPrec RepJur;
     private ReponseTraitPrec RepEn;
     private ReponseTraitPrec RepSco;
@@ -46,9 +46,9 @@ public class Preconvention implements Serializable{
         this.debut = debut;
         this.fin = fin;
         this.sujetStage = sujetStage;
-        this.RepJur = new ReponseTraitPrec(false,"");
-        this.RepEn = new ReponseTraitPrec(false,"");
-        this.RepSco = new ReponseTraitPrec(false,"");
+        this.RepJur = new ReponseTraitPrec(false, "");
+        this.RepEn = new ReponseTraitPrec(false, "");
+        this.RepSco = new ReponseTraitPrec(false, "");
     }
 
     public void setRepJur(ReponseTraitPrec RepJur) {
@@ -87,7 +87,7 @@ public class Preconvention implements Serializable{
         return diplome;
     }
 
-    public int getEntreprise() {
+    public Integer getEntreprise() {
         return entreprise;
     }
 
@@ -147,6 +147,12 @@ public class Preconvention implements Serializable{
         this.sujetStage = sujetStage;
     }
 
-    
- 
+    public long getDuréeStage() {
+        LocalDate d1 = LocalDate.parse((CharSequence) this.debut, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate d2 = LocalDate.parse((CharSequence) this.fin, DateTimeFormatter.ISO_LOCAL_DATE);
+        Duration diff = Duration.between(d2.atStartOfDay(), d1.atStartOfDay());
+        long diffDays = diff.toDays();
+        return diffDays / 30;
+    }
+
 }

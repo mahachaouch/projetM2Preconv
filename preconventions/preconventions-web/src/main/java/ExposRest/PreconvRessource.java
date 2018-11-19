@@ -40,7 +40,7 @@ public class PreconvRessource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("refPreconv") String refPreconv) {
+    public String getJsonPreconv(@PathParam("refPreconv") String refPreconv) {
         return this.gson.toJson(this.preconvSingleton.getPrevention(Integer.parseInt(refPreconv)));
     }
     
@@ -94,7 +94,7 @@ public class PreconvRessource {
     @Path("depotPreconv/{preconvention}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Preconvention ajoutLigne(@PathParam("preconvention")  String prec) {
+    public Preconvention ajoutPreconv(@PathParam("preconvention")  String prec) {
        Preconvention p;
        p = this.gson.fromJson(prec, Preconvention.class);
         return preconvSingleton.ajouterPreConvention( p.getEtudiant(),p.getDiplome(),p.getEntreprise(), p.getEntreprise(), p.getGratification(), p.getDebut(), p.getFin(), p.getSujetStage());

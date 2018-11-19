@@ -17,9 +17,9 @@ import javax.ws.rs.core.Response;
  *
  * @author maha-
  */
-public class verifications {
+public class verificationsEntreprise {
     
-  public String getSIREN(String siren){
+  public static String getSIREN(String siren){
         // I/O JSON
         Gson gson = new Gson();
 
@@ -55,8 +55,6 @@ public class verifications {
       return "test";
     }
   
-  public void validerPreconvention(){
-      
-  }
+
   
 }
