@@ -5,6 +5,7 @@
  */
 package com.alexis.lebreton.utilities.server;
 
+import com.alexis.lebreton.serviceEnseignement.verificationsEnseignement;
 import com.alexis.lebreton.serviceJuridique.traitementMetier;
 import com.alexis.lebreton.serviceScolarite.VérificationAdministrative;
 import com.alexis.lebreton.utilities.Preconvention;
@@ -40,6 +41,7 @@ public class MiseajourPreconv implements MessageListener {
     
     public traitementMetier juridique;
     public VérificationAdministrative scolarité;
+    public verificationsEnseignement enseign;
     
     public MiseajourPreconv() {
     }
@@ -56,7 +58,8 @@ public class MiseajourPreconv implements MessageListener {
                      //déclencher les 3 vérifications à faire (juridique + enseignement +
                      Preconvention p = juridique.validationJuridique(prec);
                      p = scolarité.vérifierEtud(p);
-                     System.out.println("vérifications terminés");
+                     p= enseign.vérifier(p);
+                     System.out.println("vérifications terminés pour "+p.toString());
                  }
              } catch (JMSException ex) {
                  Logger.getLogger(MiseajourPreconv.class.getName()).log(Level.SEVERE, null, ex);
