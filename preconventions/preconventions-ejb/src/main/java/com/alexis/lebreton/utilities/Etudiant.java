@@ -21,6 +21,15 @@ public class Etudiant implements Serializable{
     private String nom;
     private String prenom;
     private int numEt;
+    private String dipActuel;
+
+    public void setDipActuel(String dipActuel) {
+        this.dipActuel = dipActuel;
+    }
+
+    public String getDipActuel() {
+        return dipActuel;
+    }
 
     public Etudiant(String nom, String prenom, int numEt) {
         this.nom = nom;

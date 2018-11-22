@@ -11,4 +11,11 @@
     <module>preconventions-web</module>
     <module>preconventions-ejb</module>
   </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <version>3.2-b06</version>
+        </dependency>
+    </dependencies>
 </project>
