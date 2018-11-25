@@ -46,9 +46,9 @@ public class Preconvention implements Serializable {
         this.debut = debut;
         this.fin = fin;
         this.sujetStage = sujetStage;
-        this.RepJur = new ReponseTraitPrec(false, "");
-        this.RepEn = new ReponseTraitPrec(false, "");
-        this.RepSco = new ReponseTraitPrec(false, "");
+        this.RepJur = null;
+        this.RepEn = null;
+        this.RepSco = null;
     }
 
     public void setRepJur(ReponseTraitPrec RepJur) {
@@ -153,6 +153,14 @@ public class Preconvention implements Serializable {
         Duration diff = Duration.between(d2.atStartOfDay(), d1.atStartOfDay());
         long diffDays = diff.toDays();
         return diffDays / 30;
+    }
+    
+    public boolean isAllRep(){
+        if (this.RepJur != null && this.RepEn != null && this.RepSco != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

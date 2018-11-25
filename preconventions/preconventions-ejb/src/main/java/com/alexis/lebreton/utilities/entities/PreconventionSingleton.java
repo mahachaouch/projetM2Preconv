@@ -35,8 +35,18 @@ public class PreconventionSingleton {
     @Inject
     private JMSContext context;
     
+    private static PreconventionSingleton INSTANCE = null;
+    
     private HashMap<Integer, Preconvention> preconvs = new HashMap<>();
     private Integer lastid=0;
+    
+    public static PreconventionSingleton getInstance()
+    {           
+        if (INSTANCE == null)
+        {   INSTANCE = new PreconventionSingleton(); 
+        }
+        return INSTANCE;
+    }
     
      public Preconvention ajouterPreConvention(Etudiant etudiant, String d, int e, int a, float gratification, Date debut, Date fin, String sujetStage) {      
         Preconvention prec = new Preconvention(lastid, etudiant, d, e, a,  gratification,  debut,  fin,  sujetStage);
@@ -44,6 +54,11 @@ public class PreconventionSingleton {
        // deposerPreconv(lastid);
         this.lastid ++;        
         return prec;
+    }
+     
+    public void ajouterPreConvention(Preconvention prec) {      
+        this.preconvs.put(lastid, prec);
+        this.lastid ++;   
     }
 
     public Preconvention validerJuridique(int refPreConv, boolean v,String cause) {
@@ -62,14 +77,13 @@ public class PreconventionSingleton {
         return prec;
     }
 
-        public Preconvention validerEnseignement(int refPreconv,boolean b, String cause) {
+    public Preconvention validerEnseignement(int refPreconv,boolean b, String cause) {
         Preconvention prec = preconvs.get(refPreconv);
         prec.getRepEn().setValRep(b);
         prec.getRepEn().setCauseRep(cause);
         context.createProducer().send(queue, prec);
         return prec;
     }
-    
     
     public Preconvention getPrevention(int refPreconv) {
         return this.preconvs.get(refPreconv);
@@ -82,6 +96,7 @@ public class PreconventionSingleton {
     public HashMap<Integer,Preconvention> getAll(){
         return this.preconvs;
     }
+    
     //sert à déposer une preconvention sur le topic dédié au dépot de demande préconventions
     public Preconvention deposerPreconv(int refPrec) {
         Preconvention prec = preconvs.get(refPrec);
